@@ -1,0 +1,16 @@
+2025/06/17-13:34:14.641 6714 Reusing MANIFEST C:\Users\levkom\my-whatsapp-bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/06/17-13:34:14.652 6714 Recovering log #1434
+2025/06/17-13:34:14.802 6714 Reusing old log C:\Users\levkom\my-whatsapp-bot\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001434.log 
+2025/06/17-13:34:17.119 e3c Level-0 table #1441: started
+2025/06/17-13:34:17.159 e3c Level-0 table #1441: 507145 bytes OK
+2025/06/17-13:34:17.162 e3c Delete type=0 #1434
+2025/06/17-13:34:17.164 e3c Manual compaction at level-0 from '\x00>\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00?\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/06/17-13:34:17.164 e3c Manual compaction at level-1 from '\x00>\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00?\x00\x00\x00' @ 0 : 0; will stop at '\x00>\x00\x00\x05' @ 6722677 : 1
+2025/06/17-13:34:17.165 e3c Compacting 1@1 + 3@2 files
+2025/06/17-13:34:17.467 e3c Generated table #1442@1: 87509 keys, 2237836 bytes
+2025/06/17-13:34:17.610 e3c Generated table #1443@1: 24095 keys, 2211773 bytes
+2025/06/17-13:34:17.721 e3c Generated table #1444@1: 31547 keys, 1691981 bytes
+2025/06/17-13:34:17.721 e3c Compacted 1@1 + 3@2 files => 6141590 bytes
+2025/06/17-13:34:17.722 e3c compacted to: files[ 0 0 3 0 0 0 0 ]
+2025/06/17-13:34:17.723 e3c Delete type=2 #1441
+2025/06/17-13:34:17.725 e3c Manual compaction at level-1 from '\x00>\x00\x00\x05' @ 6722677 : 1 .. '\x00?\x00\x00\x00' @ 0 : 0; will stop at (end)
