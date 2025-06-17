@@ -1,0 +1,11 @@
+//.gitignore
+
+node_modules
+.wwebjs_auth
+*.log
+*.env
+*.jpg
+*.png
+*.webp
+.DS_Store
+
