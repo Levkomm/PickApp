@@ -1,7 +1,15 @@
 //copy of he bot 
 const { Client, LocalAuth } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+
 const axios = require('axios');
+
+const express = require('express');
+const qrcode = require('qrcode');
+let qrSvg = '';
+
+const app = express();
+const port = process.env.PORT || 3000;
+
 
 // Initialize WhatsApp client with session persistence
 const client = new Client({
@@ -9,11 +17,38 @@ const client = new Client({
     puppeteer: { headless: true }
 });
 
-// Display QR code in terminal
-client.on('qr', qr => {
-    qrcode.generate(qr, { small: true });
-    console.log('Scan the QR code to connect WhatsApp');
+app.get('/', (req, res) => {
+  res.send('<h1>WhatsApp Bot is running</h1><p><img src="/qr" /></p>');
 });
+
+app.get('/qr', (req, res) => {
+  if (!qrSvg) return res.send('QR not ready');
+  res.type('svg');
+  res.send(qrSvg);
+});
+
+client.on('qr', async qr => {
+  qrSvg = await qrcode.toString(qr, { type: 'svg' });
+  console.log('🔐 QR code updated and available at /qr');
+});
+
+app.listen(port, () => {
+  console.log(`🌐 Server is running at http://localhost:${port}`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Ready event
 client.on('ready', () => {
