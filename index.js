@@ -1,5 +1,4 @@
-import {base44Service} from './Base44Service.js';
-
+//copy of he bot 
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const axios = require('axios');
@@ -112,20 +111,6 @@ client.on('message', async message => {
                 headers: { 'Content-Type': 'application/json' }
             }
         );
-//create message instead of zapier 
-const base44 = new base44Service();
-        base44.createMessage({
-           messageText: message.body,
-           imageUrl: imageUrl,
-	   whatsapp_group: groupName || 'Direct Chat',
-        
-            created_by: 'user123'
-        }).then(response => {
-            console.log('Message created successfully:', response);
-        }).catch((error) => {
-console.error('Error creating message:', error);
-        });
-
         console.log('✅ Webhook sent successfully');
     } catch (err) {
         console.error('❌ Webhook error:', err.response?.data || err.message);
