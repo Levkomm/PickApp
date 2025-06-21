@@ -1,4 +1,7 @@
-//copy of he bot 
+//copy of no zapier code
+
+//const base44 = require('@base44/sdk');
+
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
 const axios = require('axios');
@@ -17,6 +20,8 @@ const client = new Client({
     puppeteer: { headless: true }
 });
 
+
+// Display QR code in web
 app.get('/', (req, res) => {
   res.send('<h1>WhatsApp Bot is running</h1><p><img src="/qr" /></p>');
 });
@@ -35,18 +40,6 @@ client.on('qr', async qr => {
 app.listen(port, () => {
   console.log(`🌐 Server is running at http://localhost:${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -86,6 +79,102 @@ client.on('message', async message => {
             }
         }
     };
+const processMessages = async function () {
+	const appId = '680e678ffae7fe33fb4ad6c7';
+	const apiKey	 = '25fb47e1037048e5a3b84739b433b79c';
+    console.log("Calling the 'processMessages' function for app: 680e678ffae7fe33fb4ad6c7...");
+  try {
+    // Construct the URL to your server function
+    const functionUrl = `https://base44.app/api/apps/${appId}/functions/processMessages`;
+    
+    // Make the HTTP request with your API key
+    const response = await fetch(functionUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({}) // Empty body since processMessages doesn't need parameters
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`\n❌ HTTP Error ${response.status}:`);
+      console.error(errorText);
+      return;
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      console.log("\n✅ Success! Messages processed successfully.");
+      console.log("--- Processing Summary ---");
+      console.log(`Messages processed: ${result.summary.messagesProcessed}`);
+      console.log(`Successful: ${result.summary.successful}`);
+      console.log(`Failed: ${result.summary.failed}`);
+      console.log(`Items created: ${result.summary.totalItemsCreated}`);
+      console.log(`Objects identified: ${result.summary.totalObjectsIdentified}`);
+    } else {
+      console.error("\n❌ Failure. The function executed but returned an error:");
+      console.error(result.error || "Unknown error from function.");
+    }
+
+  } catch (e) {
+    console.error("\n💥 An unexpected error occurred during the API call:");
+    console.error(e.message);
+  }
+}
+const createMessage = async function (messageData) {
+const base44 = await import('@base44/sdk');
+            // --- 2. Request Processing ---
+            try {
+                
+                const base44SDK = base44.createClient({
+                appId: '680e678ffae7fe33fb4ad6c7',
+		token: '25fb47e1037048e5a3b84739b433b79c',
+                });
+                // --- 3. Validation ---
+                // Ensure the required fields are present in the incoming data
+                if (!messageData.messageText || !messageData.imageUrl) {
+                    return new Response(JSON.stringify({
+                        error: 'Bad Request: messageText and imageUrl are required fields.'
+                    }), {
+                        status: 400,
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                }
+                // --- 4. Data Preparation & Creation ---
+                // Prepare the final object to be saved to the database
+                const finalMessageData = {
+                    messageText: messageData.messageText,
+                    imageUrl: messageData.imageUrl,
+                    whatsapp_group: messageData.whatsapp_group || null, // Optional field
+                    creation_time: new Date().toISOString(), // Set creation time to now
+                    status: 'unprocessed', // New messages always start as unprocessed
+                    created_by: messageData.created_by || 'api-service' // Default creator if not specified
+                };
+                // Use the Base44 SDK to create the new Message entity
+                const createdMessage = await base44SDK.entities.Message.create(finalMessageData);
+                // --- 5. Success Response ---
+                // Return a success response with the newly created message object
+                return new Response(JSON.stringify({
+                    success: true,
+                    message: createdMessage
+                }), {
+                    status: 201, // 201 Created
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+            catch (error) {
+                // --- 6. Error Handling ---
+                console.error("Error in createMessage function:", error);
+                const errorMessage = error instanceof SyntaxError ? "Invalid JSON in request body." : "An internal server error occurred.";
+                return new Response(JSON.stringify({ error: errorMessage }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+        };
 
     // Get group name if in group
     let groupName = null;
@@ -133,19 +222,34 @@ client.on('message', async message => {
     const imageUrl = media.data ? await uploadImageToImgur(media.data) : null;
     if (message.hasMedia && !imageUrl) return;
 
-    // Send to Zapier webhook
-    try {
-        await axios.post(
-            'https://hooks.zapier.com/hooks/catch/23282710/uyud2xs/',
-            {
-                messageText: message.body,
-                imageUrl: imageUrl,
-                groupName: groupName || 'Direct Chat'
-            },
-            {
-                headers: { 'Content-Type': 'application/json' }
-            }
-        );
+  
+   try {
+  // Send to Zapier webhook
+    //    await axios.post(
+      //      'https://hooks.zapier.com/hooks/catch/23282710/uyud2xs/',
+        //    {
+          //      messageText: message.body,
+            //    imageUrl: imageUrl,
+              //  groupName: groupName || 'Direct Chat'
+          //  },
+           // {
+            //    headers: { 'Content-Type': 'application/json' }
+          //  }
+       // );
+//create message instead of zapier 
+
+        createMessage({
+           messageText: message.body,
+           imageUrl: imageUrl,
+	   whatsapp_group: groupName || 'Direct Chat',
+        
+            created_by: 'user123'
+        }).then(response => {
+            console.log('Message created successfully:', response);
+        }).catch((error) => {
+console.error('Error creating message:', error);
+        });
+processMessages();
         console.log('✅ Webhook sent successfully');
     } catch (err) {
         console.error('❌ Webhook error:', err.response?.data || err.message);
