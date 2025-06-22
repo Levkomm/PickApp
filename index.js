@@ -1,5 +1,8 @@
+<<<<<<< HEAD
+=======
 //copy of no zapier code
 
+>>>>>>> 1e64aeb2da0581bc42245b03693f72bb9a73f4f8
 //const base44 = require('@base44/sdk');
 
 const { Client, LocalAuth } = require('whatsapp-web.js');
@@ -82,10 +85,25 @@ client.on('message', async message => {
 const processMessages = async function () {
 	const appId = '680e678ffae7fe33fb4ad6c7';
 	const apiKey	 = '25fb47e1037048e5a3b84739b433b79c';
+<<<<<<< HEAD
+
+=======
+>>>>>>> 1e64aeb2da0581bc42245b03693f72bb9a73f4f8
     console.log("Calling the 'processMessages' function for app: 680e678ffae7fe33fb4ad6c7...");
   try {
     // Construct the URL to your server function
     const functionUrl = `https://base44.app/api/apps/${appId}/functions/processMessages`;
+<<<<<<< HEAD
+    const headers = {
+       'X-API-Key': ` ${apiKey}`,
+        'Content-Type': 'application/json'
+      };
+console.log(headers);
+    // Make the HTTP request with your API key
+    const response = await fetch(functionUrl, {
+      method: 'POST',
+      headers:headers ,
+=======
     
     // Make the HTTP request with your API key
     const response = await fetch(functionUrl, {
@@ -94,6 +112,7 @@ const processMessages = async function () {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
+>>>>>>> 1e64aeb2da0581bc42245b03693f72bb9a73f4f8
       body: JSON.stringify({}) // Empty body since processMessages doesn't need parameters
     });
 
@@ -131,7 +150,11 @@ const base44 = await import('@base44/sdk');
                 
                 const base44SDK = base44.createClient({
                 appId: '680e678ffae7fe33fb4ad6c7',
+<<<<<<< HEAD
+		apiKey: '25fb47e1037048e5a3b84739b433b79c',
+=======
 		token: '25fb47e1037048e5a3b84739b433b79c',
+>>>>>>> 1e64aeb2da0581bc42245b03693f72bb9a73f4f8
                 });
                 // --- 3. Validation ---
                 // Ensure the required fields are present in the incoming data
