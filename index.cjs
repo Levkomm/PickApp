@@ -128,7 +128,7 @@ const processMessages = async function () {
 };
 
 const createMessage = async function (messageData) {
-const base44 = await import('@base44/sdk');
+const base44 = require('@base44/sdk');
             // --- 2. Request Processing ---
             try {
                 
