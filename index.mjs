@@ -2,12 +2,12 @@
 //copy of no zapier code
 
 
-const { Client, LocalAuth } = require('whatsapp-web.js');
+import { Client, LocalAuth } from 'whatsapp-web.js';
 
-const axios = require('axios');
+import axios from 'axios';
 
-const express = require('express');
-const qrcode = require('qrcode');
+import express from 'express';
+import qrcode from 'qrcode';
 let qrSvg = '';
 
 const app = express();
