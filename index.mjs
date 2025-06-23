@@ -2,7 +2,9 @@
 //copy of no zapier code
 
 
-import { Client, LocalAuth } from 'whatsapp-web.js';
+import whatsapp from 'whatsapp-web.js';
+const { Client, LocalAuth } = whatsapp;
+
 
 import axios from 'axios';
 
