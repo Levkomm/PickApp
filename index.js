@@ -80,31 +80,23 @@ client.on('message', async message => {
         }
     };
 const processMessages = async function () {
-	const appId = '680e678ffae7fe33fb4ad6c7';
-	const apiKey	 = '25fb47e1037048e5a3b84739b433b79c';
+  const appId = '680e678ffae7fe33fb4ad6c7';
+  const apiKey = '25fb47e1037048e5a3b84739b433b79c';
 
-    console.log("Calling the 'processMessages' function for app: 680e678ffae7fe33fb4ad6c7...");
+  console.log("Calling the 'processMessages' function for app: 680e678ffae7fe33fb4ad6c7...");
+
   try {
-    // Construct the URL to your server function
     const functionUrl = `https://base44.app/api/apps/${appId}/functions/processMessages`;
+
     const headers = {
-       'X-API-Key': ` ${apiKey}`,
-        'Content-Type': 'application/json'
-      };
-console.log(headers);
-    // Make the HTTP request with your API key
+      'X-API-Key': apiKey,
+      'Content-Type': 'application/json'
+    };
+
     const response = await fetch(functionUrl, {
       method: 'POST',
-      headers:headers ,
-    
-    // Make the HTTP request with your API key
-    const response = await fetch(functionUrl, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({}) // Empty body since processMessages doesn't need parameters
+      headers,
+      body: JSON.stringify({})
     });
 
     if (!response.ok) {
@@ -133,7 +125,8 @@ console.log(headers);
     console.error("\n💥 An unexpected error occurred during the API call:");
     console.error(e.message);
   }
-}
+};
+
 const createMessage = async function (messageData) {
 const base44 = await import('@base44/sdk');
             // --- 2. Request Processing ---
