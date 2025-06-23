@@ -3,7 +3,7 @@
 set -e
 
 # Step 1: Replace 'dist/index.js' with 'dist/index.cjs' in scoped package's package.json
-PACKAGE_JSON="./node_modules/@base44/package.json"
+PACKAGE_JSON="./node_modules/@base44/sdk/package.json"
 
 if [ ! -f "$PACKAGE_JSON" ]; then
   echo "ERROR: $PACKAGE_JSON not found."
