@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1: Update package.json
-PACKAGE_JSON="./node_modules/base44/package.json"
+PACKAGE_JSON="./node_modules/@base44/package.json"
 TEMP_JSON="${PACKAGE_JSON}.tmp"
 
 # Use sed to replace the line
@@ -17,8 +17,8 @@ else
 fi
 
 # Step 2: Rename index.js to index.cjs
-ORIGINAL_FILE="./node_modules/base44/sdk/dist/index.js"
-RENAMED_FILE="./node_modules/base44/sdk/dist/index.cjs"
+ORIGINAL_FILE="./node_modules/@base44/sdk/dist/index.js"
+RENAMED_FILE="./node_modules/@base44/sdk/dist/index.cjs"
 
 if [ -f "$ORIGINAL_FILE" ]; then
   mv "$ORIGINAL_FILE" "$RENAMED_FILE"
