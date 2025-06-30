@@ -80,7 +80,7 @@ client.on('message', async message => {
         }
     };
 const processMessages = async function () {
-  const appId = '680e678ffae7fe33fb4ad6c7';
+  const appId = '685abd54d007c43f6f6e0107;
   const apiKey = '25fb47e1037048e5a3b84739b433b79c';
 
   console.log("Calling the 'processMessages' function for app: 680e678ffae7fe33fb4ad6c7...");
@@ -133,7 +133,7 @@ const base44 = await import('@base44/sdk');
             try {
                 
                 const base44SDK = base44.createClient({
-                appId: '680e678ffae7fe33fb4ad6c7',
+                appId: '685abd54d007c43f6f6e0107,
 		apiKey: '25fb47e1037048e5a3b84739b433b79c',
 		token: '25fb47e1037048e5a3b84739b433b79c',
                 });
